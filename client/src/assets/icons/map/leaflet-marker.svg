@@ -1,0 +1,23 @@
+<svg width="25" height="41" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="b">
+   <stop stop-color="#2e6c97" offset="0"/>
+   <stop stop-color="#3883b7" offset="1"/>
+  </linearGradient>
+  <linearGradient id="a">
+   <stop stop-color="#126fc6" offset="0"/>
+   <stop stop-color="#4c9cd1" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="-0.004651" x2="0.498125" y1="0.971494" x1="0.498125" id="c" xlink:href="#a"/>
+  <linearGradient y2="-0.004651" x2="0.415917" y1="0.490437" x1="0.415917" id="d" xlink:href="#b"/>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="43" width="27" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_2" fill="#fff" width="12.625" height="14.5" x="410.279" y="507.575"/>
+  <path stroke="url(#d)" id="svg_3" stroke-linecap="round" stroke-width="1.1" fill="url(#c)" d="m12.476255,1.150167c-6.470808,0 -11.856749,5.746179 -11.856749,11.981051c0,2.804935 1.539684,6.369162 2.652116,8.8308l9.161317,18.045285l9.118001,-18.045285c1.112432,-2.461639 2.695432,-5.847149 2.695432,-8.8308c0,-6.234872 -5.299309,-11.981051 -11.770117,-11.981051zm0,7.224374c2.543826,0.017165 4.606254,2.142575 4.606254,4.755668s-2.062428,4.708212 -4.606254,4.724367c-2.543826,-0.017165 -4.606254,-2.110264 -4.606254,-4.724367c0,-2.613093 2.062428,-4.738503 4.606254,-4.755668z"/>
+ </g>
+</svg>
