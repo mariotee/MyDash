@@ -1,6 +1,6 @@
 const Database = require("../database.js")
-const ConnectionString = require("../secrets.js").TEST_CONN_STRING
-const databaseInstance = new Database(ConnectionString)
+const secrets = require("../nodemon.json")
+const databaseInstance = new Database(secrets.env.TEST_CONN_STRING)
 
 before(async () => {
   await databaseInstance.open()
