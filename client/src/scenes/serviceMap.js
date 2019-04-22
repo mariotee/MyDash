@@ -10,7 +10,7 @@ import Layout from 'layout';
 class ServiceMap extends React.Component {
   render() {
     return (
-      <Layout title="Service Monitor">
+      <Layout title="Distributed Service Map">
         <Grid container spacing={24}>
           <Grid item xs={12}>
             <Card style={{ height: '800px' }}>

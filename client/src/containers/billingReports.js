@@ -72,7 +72,7 @@ class BillingReportsContainer extends React.Component {
           </Grid>
           <Grid item xs={12} md={8}>
             <Card style={{ height: '88vh' }}>
-              <BillingTabs tabData={TABS} indicatorColor='primary'/>              
+              <BillingTabs tabData={TABS} indicatorColor='primary'/>
             </Card>
           </Grid>
         </Grid>

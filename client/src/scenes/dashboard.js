@@ -89,7 +89,7 @@ class DashboardContainer extends React.Component {
           <Grid item xs={7}>
             <Card>
               <CardContent>
-                <Typography variant="title">{'Service Monitor'}</Typography>
+                <Typography variant="title">{'Service Map'}</Typography>
                 <div style={{ height: '415px' }}>
                   <ServiceMapContainer/>
                 </div>

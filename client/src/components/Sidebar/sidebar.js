@@ -25,15 +25,15 @@ class Sidebar extends React.Component {
 
     const listOfLinks = (
       <List>
-        {this.props.routes.map((element, index) => {
-          return (
-            <ListItem key={index} className={classes.item}>
+        {
+          this.props.routes.map((element, index) => {
+            return <ListItem key={index} className={classes.item}>
               <NavLink to={element.path}
                 className={classnames({
                   [classes.itemLink]: true,
                   [classes.itemActive]: this.props.currentPath === element.path,
-}
-                )}>
+                }
+              )}>
                 <ListItemIcon className={classes.itemIcon}>
                   <element.icon />
                 </ListItemIcon>
@@ -44,8 +44,7 @@ class Sidebar extends React.Component {
                 />
               </NavLink>
             </ListItem>
-          );
-        })
+          })
       }
       </List>
     );

@@ -1,29 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as CustomerActions from 'store/Customers/actions.js';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as CustomerActions from 'store/Customers/actions.js'
 
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card'
 
-import TableTitle from 'components/TableTitle';
-import CustomerTable from 'components/Customers/CustomerTable';
-import CustomerInfo from 'components/Customers/CustomerInfo';
+import TableTitle from 'components/TableTitle'
+import CustomerTable from 'components/Customers/CustomerTable'
+import CustomerInfo from 'components/Customers/CustomerInfo'
 
-import * as CheckRequests from 'utils/CheckRequests.js';
-import { ERROR, SUCCESS } from 'constants/status.js';
+import * as CheckRequests from 'utils/CheckRequests.js'
+import { ERROR, SUCCESS } from 'constants/status.js'
 
 const mapStateToProps = (state) => ({
   customerData: state.customers.data,        
   customerGetStatus: state.customers.getStatus,    
   customerPostStatus: state.customers.postStatus,
   customerPutStatus: state.customers.putStatus,  
-});
+})
 
 const mapDispatchToProps = (dispatch) => ({
-    customerActions: bindActionCreators(CustomerActions, dispatch),
-});
+  customerActions: bindActionCreators(CustomerActions, dispatch),
+})
 
 const defaultNewCustomer = {
   name: "",
@@ -42,81 +42,81 @@ class CustomerAccountManagementContainer extends React.Component {
     editingCustomerInfo: false,    
     customerSaveChangesAlert: false,    
     customerDialog: false,    
-  };
+  }
 
   componentDidMount() {
-    this.props.customerActions.getAllCustomersFromApi();
+    this.props.customerActions.getAllCustomersFromApi()
   }
 
   componentDidUpdate(prevProps) {
-    this.checkSaveChanges();
-    this.checkLoaded(prevProps);
-    this.checkAllGetStatus();
-    this.checkCustomerPostStatus();
-    this.checkCustomerPutStatus();
+    this.checkSaveChanges()
+    this.checkLoaded(prevProps)
+    this.checkAllGetStatus()
+    this.checkCustomerPostStatus()
+    this.checkCustomerPutStatus()
   }
 
   checkAllGetStatus = () => {    
     const getRequests = [
       this.props.customerGetStatus,      
-    ];
+    ]
 
     if ( CheckRequests.allFinished(getRequests) && CheckRequests.allFailed(getRequests) ) {
-      window.alert('all GET requests failed. check to make sure web API is running');
+      window.alert('all GET requests failed. check to make sure web API is running')
     } else if ( CheckRequests.allFinished(getRequests) && CheckRequests.someFailed(getRequests) ) {
-      window.alert('some GET requests failed. check to make sure web API is running');
+      window.alert('some GET requests failed. check to make sure web API is running')
     }
   }
 
   checkCustomerPostStatus = () => {
     if (this.props.customerPostStatus === SUCCESS) {
-      console.log('success POST');
-      this.props.customerActions.setPostStatusToIdle();
-      this.props.customerActions.getAllCustomersFromApi();
+      console.log('success POST')
+      this.props.customerActions.setPostStatusToIdle()
+      this.props.customerActions.getAllCustomersFromApi()
     } else if (this.props.customerPostStatus === ERROR) {
-      window.alert('failed to POST');
-      this.props.customerActions.setPostStatusToIdle();
+      window.alert('failed to POST')
+      this.props.customerActions.setPostStatusToIdle()
     }
   }
 
   checkCustomerPutStatus = () => {
     if (this.props.customerPutStatus === SUCCESS) {
-      console.log('sucess PUT');
-      this.props.customerActions.setPutStatusToIdle();
-      this.props.customerActions.getAllCustomersFromApi();
+      console.log('sucess PUT')
+      this.props.customerActions.setPutStatusToIdle()
+      this.props.customerActions.getAllCustomersFromApi()
     } else if (this.props.customerPutStatus === ERROR) {
-      window.alert('failed to PUT');
-      window.location.reload(); //temporary fix for UI state set even if fails to PUT
-      this.props.customerActions.setPutStatusToIdle();
+      window.alert('failed to PUT')
+      window.location.reload() //temporary fix for UI state set even if fails to PUT
+      this.props.customerActions.setPutStatusToIdle()
     }
   }  
 
   checkSaveChanges = () => {
     if (this.state.customerSaveChangesAlert) {
       if (window.confirm('Save Changes to Customer Info?')) {
-        this.props.customerActions.updateCustomerWithApi(this.state.editedCustomer);
+        this.props.customerActions.updateCustomerWithApi(this.state.editedCustomer)
         this.setState({
           currentCustomer: this.state.editedCustomer,
           editedCustomer: { ...this.state.editedCustomer },
           editingCustomerInfo: false,
           customerSaveChangesAlert: false,
-        });
+        })
       } else {
         this.setState({
           editedCustomer: { ...this.state.currentCustomer },
           editingCustomerInfo: false,
           customerSaveChangesAlert: false,
-        });
+        })
       }
     }    
-  };
+  }
 
   checkLoaded = (prevProps) => {
     if (this.props.customerData !== prevProps.customerData) {
-      console.log('loaded customer');
-      this.setState({ filterCustomerData: [...this.props.customerData] });
+      console.log('loaded customer')
+      this.setState({ filterCustomerData: [...this.props.customerData] })
     }    
-  };
+  }
 
   /*CUSTOMER HANDLERS*/
   searchCustomerName = (event) => {
@@ -124,84 +124,84 @@ class CustomerAccountManagementContainer extends React.Component {
       filterCustomerData: this.props.customerData.filter((element) =>
         element.name.toLowerCase().includes(event.target.value.toLowerCase()),
       ),
-    });
-  };
+    })
+  }
 
   customerClick = (customer) => {
     if (this.state.editingCustomerInfo) {
-      this.setState({ customerSaveChangesAlert: true });
-    }else {
+      this.setState({ customerSaveChangesAlert: true })
+    } else {
       this.setState({
         currentCustomer: customer,
         editedCustomer: { ...customer },
         currentLicense: {},
-      });
+      })
     }
-  };
+  }
 
   customerAddOpen = () => {
-    this.setState({ customerDialog: true });
-  };
+    this.setState({ customerDialog: true })
+  }
 
   customerAddCancel = () => {
-    console.log('customer add cancel');
+    console.log('customer add cancel')
     this.setState({
       newCustomer: {},
       customerDialog: false,
-    });
-  };
+    })
+  }
 
   customerAddFail = () => {
-    console.log('fail');
+    console.log('fail')
     this.setState({
       newCustomer: {},
       customerDialog: false,
-    });
-  };
+    })
+  }
 
   addTextToNewCustomerBuffer = (event, prop) => {    
     if (prop.includes(".")) {
       let key = prop.split(".")
       console.log(key[0])
-      let customerBuffer = this.state.newCustomer;
-      customerBuffer[key[0]][key[1]] = event.target.value;
-      this.setState({ newCustomer: customerBuffer });
+      let customerBuffer = this.state.newCustomer
+      customerBuffer[key[0]][key[1]] = event.target.value
+      this.setState({ newCustomer: customerBuffer })
     } else {
-      let customerBuffer = this.state.newCustomer;
-      customerBuffer[prop] = event.target.value;
-      this.setState({ newCustomer: customerBuffer });
+      let customerBuffer = this.state.newCustomer
+      customerBuffer[prop] = event.target.value
+      this.setState({ newCustomer: customerBuffer })
     }        
-  };
+  }
 
   customerAddToData = () => {
-    this.props.customerActions.postNewCustomerWithApi(this.state.newCustomer);
+    this.props.customerActions.postNewCustomerWithApi(this.state.newCustomer)
     this.setState({
       newCustomer: {...defaultNewCustomer},
       customerDialog: false }
-    );
-  };
+    )
+  }
 
   handleCustomerEditToggle = () => {
     if (this.state.currentCustomer.customerName) {
-this.setState({
+      this.setState({
         editingCustomerInfo: !this.state.editingCustomerInfo,
         editedCustomer: { ...this.state.currentCustomer },
-      });
-}
-  };
+      })
+    }
+  }
 
   handleCustomerFieldChange = (object, prop, value) => {
-    object[prop] = value;
-    this.setState({ editedCustomer: object });
-  };
+    object[prop] = value
+    this.setState({ editedCustomer: object })
+  }
 
   handleCustomerSaveChanges = () => {
-    this.setState({ customerSaveChangesAlert: true });
-  };
+    this.setState({ customerSaveChangesAlert: true })
+  }
 
   handleCustomerCancelChanges = () => {
-    this.handleCustomerEditToggle();
-  };  
+    this.handleCustomerEditToggle()
+  }  
 
   render() {
     return (
@@ -243,7 +243,7 @@ this.setState({
           </Card>
         </Grid>        
       </Grid>
-    );
+    )
   }
 }
 
@@ -251,6 +251,6 @@ CustomerAccountManagementContainer.propTypes = {
   customerData: PropTypes.arrayOf(PropTypes.object).isRequired,      
   updateCustomer: PropTypes.func.isRequired,  
   postNewCustomer: PropTypes.func.isRequired,  
-};
+}
 
-export default connect(mapStateToProps,mapDispatchToProps,)(CustomerAccountManagementContainer);
+export default connect(mapStateToProps,mapDispatchToProps,)(CustomerAccountManagementContainer)

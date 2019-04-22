@@ -107,7 +107,7 @@ class TaskManagerContainer extends React.Component {
           handleClose={this.closeDialog}
         />
       </div>
-    );
+    )
   }
 }
 
@@ -123,4 +123,4 @@ TaskManagerContainer.propTypes = {
   setPostStatusToIdle: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(TaskManagerContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(TaskManagerContainer)

@@ -14,8 +14,7 @@ function MarkerDialog({ ...props }) {
         <p>
           {`
             This service is located in:
-            ${props.currentLocation.city},
-            ${props.currentLocation.region},
+            ${props.currentLocation.city},            
             ${props.currentLocation.country}
           `}
           <br/>
@@ -59,14 +58,14 @@ function MarkerDialog({ ...props }) {
         />
         <br/>
         <Button
-          style={{ marginLeft: '15%', marginRight: '10%' }}
+          style={{margin: "8px"}}
           variant="contained"
           onClick={() => props.closeDialog()}
         >
           {'Cancel'}
-        </Button>
-        <Button
-          style={{ marginLeft: '15%', marginRight: '10%' }}
+        </Button>        
+        <Button         
+          style={{margin: "8px"}} 
           variant="contained"
           onClick={() => props.submitChange()}
         >
