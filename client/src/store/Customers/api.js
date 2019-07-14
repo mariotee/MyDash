@@ -5,13 +5,19 @@ import { WEB_API_HOST } from 'constants/network.js';
 const api = axios.create({ baseURL: WEB_API_HOST });
 
 export function getCustomers() {
-  return api.get('api/customers');
+  return process.env.REACT_APP_DEMO
+    ? new Promise((res,rej) => res({data:[]}))
+    : api.get('api/customers');
 }
 
 export function updateCustomer(object) {
-  return api.put(`/api/customers/${object.id}`, object);
+  return process.env.REACT_APP_DEMO
+    ? new Promise((res,rej) => res({data:object}))
+    : api.put(`/api/customers/${object.id}`, object);
 }
 
 export function postCustomer(object) {
-  return api.post('/api/customers', object);
+  return process.env.REACT_APP_DEMO
+    ? new Promise((res,rej) => res({data:object}))
+    : api.post('/api/customers', object);
 }
