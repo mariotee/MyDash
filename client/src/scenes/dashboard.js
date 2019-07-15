@@ -54,95 +54,93 @@ class DashboardContainer extends React.Component {
       showArea: true,
     };
 
-    return (
-      <Layout title="Dashboard">
-        <Grid container spacing={16}>
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="title">{'Revenue'}</Typography>
-                <MockRevenueContainer />
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Card>
-              <CardContent>
-                <Typography variant="title">{'Data (hardcoded)'}</Typography>
-                <Chartist
-                  data={data}
-                  options={options}
-                  type={'Line'}
-                  listener={animation}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={5}>
-            <Card>
-              <CardContent>
-                <Typography variant="title">{'Incomplete Tasks'}</Typography>
-                <IncompleteTasksContainer/>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={7}>
-            <Card>
-              <CardContent>
-                <Typography variant="title">{'Service Map'}</Typography>
-                <div style={{ height: '415px' }}>
-                  <ServiceMapContainer/>
-                </div>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="title">{'Analyses (hardcoded)'}</Typography>
-                <Typography variant="caption">{'(This Week)'}</Typography>
-                <Chartist
-                  data={barGraphData}
-                  options={options}
-                  type={'Bar'}
-                  listener={animation}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="title">{'Line Graph (hardcoded)'}</Typography>
-                <Typography variant="caption">{'(Some Graph)'}</Typography>
-                <Chartist
-                  data={thirdData}
-                  options={options}
-                  type={'Line'}
-                  listener={animation}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant="title">{'Line Graph (hardcoded)'}</Typography>
-                <Typography variant="caption">
-                  {'(Some Other Graph)'}
-                </Typography>
-                <Chartist
-                  data={fourthData}
-                  options={options}
-                  type={'Line'}
-                  listener={animation}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
+    return <Layout title={"Dashboard" + process.env.REACT_APP_DEMO ? "(This is a demo. Source code is public in my GitHub repos)":""}>
+      <Grid container spacing={16}>
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Typography variant="title">{'Revenue'}</Typography>
+              <MockRevenueContainer />
+            </CardContent>
+          </Card>
         </Grid>
-      </Layout>
-    );
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Typography variant="title">{'Data (hardcoded)'}</Typography>
+              <Chartist
+                data={data}
+                options={options}
+                type={'Line'}
+                listener={animation}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={5}>
+          <Card>
+            <CardContent>
+              <Typography variant="title">{'Incomplete Tasks'}</Typography>
+              <IncompleteTasksContainer/>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={7}>
+          <Card>
+            <CardContent>
+              <Typography variant="title">{'Service Map'}</Typography>
+              <div style={{ height: '415px' }}>
+                <ServiceMapContainer/>
+              </div>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+              <Typography variant="title">{'Analyses (hardcoded)'}</Typography>
+              <Typography variant="caption">{'(This Week)'}</Typography>
+              <Chartist
+                data={barGraphData}
+                options={options}
+                type={'Bar'}
+                listener={animation}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+              <Typography variant="title">{'Line Graph (hardcoded)'}</Typography>
+              <Typography variant="caption">{'(Some Graph)'}</Typography>
+              <Chartist
+                data={thirdData}
+                options={options}
+                type={'Line'}
+                listener={animation}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+              <Typography variant="title">{'Line Graph (hardcoded)'}</Typography>
+              <Typography variant="caption">
+                {'(Some Other Graph)'}
+              </Typography>
+              <Chartist
+                data={fourthData}
+                options={options}
+                type={'Line'}
+                listener={animation}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </Layout>    
   }
 }
 
